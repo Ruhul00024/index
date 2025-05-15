@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AgeQuick is a simple and fast age calculator website. Calculate your age in years, months, and days. Available in English and Bangla." />
+  <meta name="keywords" content="age calculator, AgeQuick, calculate age, birth date, age tool, online age calculator, বাংলা বয়স হিসাব" />
+  <meta name="author" content="AgeQuick Team" />
+  <meta property="og:title" content="AgeQuick - Free Age Calculator" />
+  <meta property="og:description" content="Instantly calculate your age in years, months, and days. Available in Bangla and English." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.netlify.app/" />
+  <meta property="og:image" content="https://yourdomain.netlify.app/thumbnail.jpg" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "AgeQuick",
+      "url": "https://agequick.netlify.app",
+      "applicationCategory": "Utility",
+      "description": "Calculate your age quickly and accurately in years, months, and days.",
+      "inLanguage": ["en", "bn"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
+  <title>AgeQuick - Age Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      margin-top: 2rem;
+    }
+    input[type="date"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin: 1rem 0;
+      width: 100%;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    .lang-toggle {
+      margin-bottom: 1rem;
+    }
+    .lang-toggle button {
+      background-color: #e0e0e0;
+      color: black;
+      margin: 0 5px;
+    }
+    section {
+      max-width: 700px;
+      background: white;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-align: left;
+    }
+    h2, h3 {
+      color: #333;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    footer {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      width: 100%;
+      margin-top: 2rem;
+    }
+    footer a {
+      color: #00aced;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+      .container, section {
+        padding: 1rem;
+      }
+      input[type="date"], button {
+        font-size: 1rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lang-toggle">
+      <button onclick="setLang('en')">English</button>
+      <button onclick="setLang('bn')">বাংলা</button>
+    </div>
+    <h2 id="title">Age Calculator</h2>
+    <label id="label" for="dob">Enter your Date of Birth:</label>
+    <input type="date" id="dob" />
+    <label id="labelTo" for="toDate">Check age up to (default is today):</label>
+    <input type="date" id="toDate" />
+    <button onclick="calculateAge()" id="calcBtn">Calculate</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <section>
+    <h2>What is AgeQuick?</h2>
+    <p>AgeQuick is a simple and fast online age calculator tool. You can calculate your exact age from your birth date to today or any date of your choice. The result includes years, months, and days. Whether you’re filling out forms, checking your retirement age, or just curious — AgeQuick makes it easy and fast.</p>
+    <h3>Why use AgeQuick?</h3>
+    <ul>
+      <li>✓ Free and fast age calculator</li>
+      <li>✓ Available in English and Bangla</li>
+      <li>✓ Works on mobile and desktop</li>
+      <li>✓ No registration needed</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>AgeQuick কী?</h2>
+    <p>AgeQuick হলো একটি সহজ ও দ্রুত অনলাইন বয়স নির্ণয়কারী টুল। আপনার জন্মতারিখ থেকে আজকের তারিখ বা আপনার পছন্দের যেকোনো তারিখ পর্যন্ত সঠিক বয়স হিসাব করতে পারবেন — বছর, মাস এবং দিনসহ। ফর্ম পূরণ, চাকরি বা রিটায়ারমেন্টের বয়স জানার জন্য AgeQuick খুবই উপকারী।</p>
+    <h3>AgeQuick কেন ব্যবহার করবেন?</h3>
+    <ul>
+      <li>✓ সম্পূর্ণ ফ্রি এবং দ্রুত</li>
+      <li>✓ ইংরেজি ও বাংলা ভাষায়</li>
+      <li>✓ মোবাইল ও কম্পিউটারে ব্যবহারযোগ্য</li>
+      <li>✓ একদম সহজ, কোনো রেজিস্ট্রেশন লাগবে না</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Contact Us</h2>
+    <p>If you have feedback, suggestions or partnership inquiries, please email us at <strong>agequickhelp@gmail.com</strong>.</p>
+  </section>
+
+  <section>
+    <h2>About AgeQuick</h2>
+    <p>AgeQuick was created to help people quickly calculate their age for everyday use. It’s designed to be free, fast, and accessible on any device. We believe in making useful tools for the public — without ads, paywalls, or clutter.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 AgeQuick. All rights reserved.</p>
+    <p>
+      <a href="https://facebook.com" target="_blank">Facebook</a> |
+      <a href="https://twitter.com" target="_blank">Twitter</a> |
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </p>
+  </footer>
+
+  <!-- Google AdSense (sample placeholder, replace with real account ID) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx" crossorigin="anonymous"></script>
+
+  <script>
+    let lang = 'en';
+    function setLang(selectedLang) {
+      lang = selectedLang;
+      document.getElementById("title").textContent =
+        lang === 'bn' ? "বয়স গণনা করুন" : "Age Calculator";
+      document.getElementById("label").textContent =
+        lang === 'bn' ? "আপনার জন্মতারিখ লিখুন:" : "Enter your Date of Birth:";
+      document.getElementById("labelTo").textContent =
+        lang === 'bn' ? "যে তারিখ পর্যন্ত জানতে চান (ডিফল্ট আজকের তারিখ):" : "Check age up to (default is today):";
+      document.getElementById("calcBtn").textContent =
+        lang === 'bn' ? "হিসাব করুন" : "Calculate";
+      document.getElementById("result").textContent = '';
+    }
+
+    function calculateAge() {
+      const dob = document.getElementById("dob").value;
+      const toDateInput = document.getElementById("toDate").value;
+      if (!dob) return;
+
+      const birthDate = new Date(dob);
+      const toDate = toDateInput ? new Date(toDateInput) : new Date();
+
+      let years = toDate.getFullYear() - birthDate.getFullYear();
+      let months = toDate.getMonth() - birthDate.getMonth();
+      let days = toDate.getDate() - birthDate.getDate();
+
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(toDate.getFullYear(), toDate.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      const formattedDate = toDate.toLocaleDateString();
+      const resultText = lang === 'bn'
+        ? `আপনার বয়স ${years} বছর, ${months} মাস, ${days} দিন ( ${formattedDate} তারিখ পর্যন্ত )।`
+        : `You are ${years} years, ${months} months, and ${days} days old (as of ${formattedDate}).`;
+
+      document.getElementById("result").textContent = resultText;
+    }
+
+    window.onload = function () {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById("toDate").value = today;
+    }
+  </script>
+</body>
+</html>
